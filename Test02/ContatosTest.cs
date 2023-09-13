@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 namespace Agenda.DAL.Test
 {
     [TestFixture]
-    public class ContatosTest
+    public class ContatosTest : BaseTest
     {
         Contatos _contatos;
 
@@ -14,7 +14,7 @@ namespace Agenda.DAL.Test
             _contatos = new Contatos();
         }
 
-        //IncluirContatoTest
+        
         [Test]
         public void AdicionarContatoTest()
         {
@@ -29,7 +29,7 @@ namespace Agenda.DAL.Test
             Assert.True(true);
         }
 
-        //ObterContatoTest
+        
         [Test]
         public void ObterContatoTest()
         {
