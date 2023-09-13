@@ -1,4 +1,5 @@
-﻿namespace Agenda.Domain
+﻿
+namespace Agenda.Domain
 {
     public class Contato
     {
