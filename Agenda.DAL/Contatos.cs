@@ -1,6 +1,8 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using Agenda.Domain;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Agenda.DAL
 {
@@ -11,8 +13,9 @@ namespace Agenda.DAL
 
         public Contatos()
         {
-            _strCon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+            IConfigurationRoot configuracao = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             //_strCon = @"Data Source=.\sqlexpress;Initial Catalog=Agenda;Integrated Security=True;";
+            _strCon = configuracao.GetConnectionString("con");
             _con = new SqlConnection(_strCon);
         }
 

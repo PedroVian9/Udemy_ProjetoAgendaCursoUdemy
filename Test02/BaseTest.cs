@@ -15,7 +15,7 @@ namespace Agenda.DAL.Test
         private string _con;
         private string _catalogTest;
 
-        public BaseTest() 
+        public BaseTest()
         {
             //_script = @"ProjetoDB_Create.sql";
             //_con = ConfigurationManager.ConnectionStrings["conSetUpTest"].ConnectionString;
