@@ -12,11 +12,13 @@ namespace Agenda.DAL
     {
         string _strCon;
         SqlConnection _con;
+        string _catalogTest;
 
         public Contatos()
         {
             IConfigurationRoot configuracao = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();            
             _strCon = configuracao.GetConnectionString("con");
+            _catalogTest = configuracao["providerName:conSetUpTest"];
             _con = new SqlConnection(_strCon);
         }
 

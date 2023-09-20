@@ -8,6 +8,8 @@ using System.Configuration;
 using System.Runtime.Intrinsics.Arm;
 using System.Data.SqlClient;
 using System.IO;
+using Microsoft.Extensions.Configuration;
+
 namespace Agenda.DAL.Test
 {
     [TestFixture]
@@ -16,14 +18,14 @@ namespace Agenda.DAL.Test
         private string _script;
         private string _con;
         private string _catalogTest;
-
+        
         public BaseTest()
         {
+            IConfigurationRoot configuracao = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             _script = @"ProjetoDB_Create.sql";
-            _con = ConfigurationManager.ConnectionStrings["conSetUpTest"].ConnectionString;
-            _catalogTest = ConfigurationManager.ConnectionStrings["conSetUpTest"].ProviderName;
+            _con = configuracao.GetConnectionString("conSetUpTest");
+            _catalogTest = configuracao["providerName:conSetUpTest"];
         }
-
 
         [OneTimeSetUp]
         public void OneTimeSetup()
@@ -37,7 +39,7 @@ namespace Agenda.DAL.Test
             DeleteDBTest();
         }
 
-        private void CreatDBTest()
+        private void CreateDBTest()
         {
             using (var con = new SqlConnection(_con))
             {
@@ -51,8 +53,7 @@ namespace Agenda.DAL.Test
                     .Replace("WITH (DATA_COMPRESSION = PAGE)", string.Empty)
                     .Replace("SET NOEXEC ON", string.Empty)
                     .Replace("GO\r\n", "|");
-
-                ExecuteScriptSql(con, scriptSql);
+                     ExecuteScriptSql(con, scriptSql);
             }
         }
 
@@ -84,7 +85,15 @@ namespace Agenda.DAL.Test
                 con.Open();
                 using (var cmd = con.CreateCommand())
                 {
-                    cmd.CommandText = 
+                    cmd.CommandText = $@"USE [master];
+                                            DECLARE @kill varchar(8000) = '';
+                                            SELECT  @kill = @kill + 'kill' + CONVERT(varchar(5),session_id) + ';'
+                                            FROM sys.dm_exec_sessions
+                                            WHERE database_id = db_id('{_catalogTest}')
+                                            EXEC(@kill);";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = $"DROP DATABASE {_catalogTest}";
+                    cmd.ExecuteNonQuery();
                 }
             }    
         }
