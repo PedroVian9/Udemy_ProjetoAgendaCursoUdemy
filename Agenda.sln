@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agenda.Domain", "Agenda.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenda.Repos", "Agenda.Repos\Agenda.Repos.csproj", "{2E7F482C-DDC5-44A2-B3AB-4191381ED07C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenda.Repos.Test", "Agenda.Repos.Test\Agenda.Repos.Test.csproj", "{1EFB00B1-FBF6-482F-AA7C-3C1831FBFE4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2E7F482C-DDC5-44A2-B3AB-4191381ED07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E7F482C-DDC5-44A2-B3AB-4191381ED07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E7F482C-DDC5-44A2-B3AB-4191381ED07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EFB00B1-FBF6-482F-AA7C-3C1831FBFE4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EFB00B1-FBF6-482F-AA7C-3C1831FBFE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EFB00B1-FBF6-482F-AA7C-3C1831FBFE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EFB00B1-FBF6-482F-AA7C-3C1831FBFE4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
