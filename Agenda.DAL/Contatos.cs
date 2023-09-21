@@ -1,69 +1,62 @@
-﻿using System.Configuration;
+﻿using System;
 using System.Data.SqlClient;
 using Agenda.Domain;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using System.Drawing;
+using Dapper;
+using System.Linq;
 
 namespace Agenda.DAL
 {
     public class Contatos
     {
         string _strCon;
-        SqlConnection _con;
 
-        public Contatos()
-        {
-            _strCon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
-            //_strCon = @"Data Source=.\sqlexpress;Initial Catalog=Agenda;Integrated Security=True;";
-            _con = new SqlConnection(_strCon);
+        public Contatos() {
+
+            IConfigurationRoot configuracao = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+
+            _strCon = configuracao.GetConnectionString("AgendaTest");   
+
         }
+        
 
         public void Adicionar(Contato contato)
         {
-            _con.Open();
-
-            var sql = String.Format("insert into Contato (Id, Nome) values ('{0}', '{1}');", contato.Id, contato.Nome);
-            var cmd = new SqlCommand(sql, _con);
-
-            cmd.ExecuteNonQuery();
-            _con.Close();
+            using(var con = new SqlConnection(_strCon))
+            {
+                con.Execute("insert into Contato (Id, Nome) values (@Id, @Nome)", contato);
+            }
+            
         }
 
-        public Contato Obter(Guid id)
-        {
-            _con.Open();
+        public Contato Obter(Guid id) {
 
-            var sql = String.Format("select Id, Nome from Contato where Id = '{0}';", id);
-            var cmd = new SqlCommand(sql, _con);
+            Contato contato;
 
-            var sqlDataReader = cmd.ExecuteReader();
-            sqlDataReader.Read();
-            var contato = new Contato()
+            using (var con = new SqlConnection(_strCon))
             {
-                Id = Guid.Parse(sqlDataReader["Id"].ToString()),
-                Nome = sqlDataReader["Nome"].ToString()
-            };
-
+                contato = con.QueryFirst<Contato>("select Id, Nome from Contato where Id = @Id", new { Id = id });
+                
+               
+            }
             return contato;
         }
-
         public List<Contato> ObterTodos()
         {
             var contatos = new List<Contato>();
-            _con.Open();
 
-            var sql = String.Format("select Id, Nome from Contato;");
-            var cmd = new SqlCommand(sql, _con);
-
-            var sqlDataReader = cmd.ExecuteReader();
-            while(sqlDataReader.Read())
+            using (var con = new SqlConnection(_strCon))
             {
-                var contato = new Contato()
-                {
-                    Id = Guid.Parse(sqlDataReader["Id"].ToString()),
-                    Nome = sqlDataReader["Nome"].ToString()
-                };
-                contatos.Add(contato);
+                contatos = con.Query<Contato>("select Id, Nome from Contato").ToList();           
+
             }
+            
             return contatos;
         }
+
     }
+    
 }

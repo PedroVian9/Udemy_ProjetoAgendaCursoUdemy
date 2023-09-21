@@ -43,19 +43,18 @@
             lblContatoNovo.Size = new Size(80, 15);
             lblContatoNovo.TabIndex = 0;
             lblContatoNovo.Text = "Contato novo";
-            
             // 
             // txtContatoNovo
             // 
             txtContatoNovo.Location = new Point(12, 27);
             txtContatoNovo.Name = "txtContatoNovo";
-            txtContatoNovo.Size = new Size(259, 23);
+            txtContatoNovo.Size = new Size(301, 23);
             txtContatoNovo.TabIndex = 1;
             // 
             // lblContatoSalvo
             // 
             lblContatoSalvo.AutoSize = true;
-            lblContatoSalvo.Location = new Point(12, 53);
+            lblContatoSalvo.Location = new Point(11, 62);
             lblContatoSalvo.Name = "lblContatoSalvo";
             lblContatoSalvo.Size = new Size(81, 15);
             lblContatoSalvo.TabIndex = 2;
@@ -63,16 +62,16 @@
             // 
             // txtContatoSalvo
             // 
-            txtContatoSalvo.Location = new Point(12, 71);
+            txtContatoSalvo.Location = new Point(13, 82);
             txtContatoSalvo.Name = "txtContatoSalvo";
-            txtContatoSalvo.Size = new Size(259, 23);
+            txtContatoSalvo.Size = new Size(299, 23);
             txtContatoSalvo.TabIndex = 3;
             // 
             // btnSalvar
             // 
-            btnSalvar.Location = new Point(196, 100);
+            btnSalvar.Location = new Point(170, 123);
             btnSalvar.Name = "btnSalvar";
-            btnSalvar.Size = new Size(75, 23);
+            btnSalvar.Size = new Size(143, 58);
             btnSalvar.TabIndex = 4;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
