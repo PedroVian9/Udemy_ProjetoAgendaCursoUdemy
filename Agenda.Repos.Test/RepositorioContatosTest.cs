@@ -53,12 +53,6 @@ namespace Agenda.Repos.Test
             Assert.AreEqual(mContato.Object.Id, contatoResultado.Id);
             Assert.AreEqual(mContato.Object.Nome, contatoResultado.Nome);
         }
-        [Test]
-        public void teste()
-        {
-            int a = 0;
-            Assert.That(9, Is.EqualTo(a));
-        }
 
         [TearDown]
         public void TearDown()
