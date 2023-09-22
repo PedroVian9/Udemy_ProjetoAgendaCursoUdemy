@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agenda.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Agenda.DAL
 {
     public interface ITelefones
     {
-        List<ITelefones> ObterTodosDoContato(Guid ContatoId);
+        List<ITelefone> ObterTodosDoContato(Guid ContatoId);
+        
     }
+
 }

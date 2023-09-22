@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Agenda.DAL;
 using AutoFixture;
 using NUnit.Framework;
-using AutoFixture;
 using Agenda.Domain;
 
 namespace Agenta.DAL.Test

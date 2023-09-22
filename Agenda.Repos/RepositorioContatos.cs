@@ -19,12 +19,11 @@ namespace Agenda.Repos
             _telefones = telefones;
         }
 
-        public IContato ObterPorId(Guid id)
+        public IContato ObterPorId(Guid Id)
         {
-            IContato contato = _contatos.Obter(id);
-            List<ITelefone> lstTelefone = _telefones.ObterTodosDoContato(id);
+            IContato contato = _contatos.Obter(Id);
+            List<ITelefone> lstTelefone = _telefones.ObterTodosDoContato(Id);
             contato.Telefones = lstTelefone;
-
             return contato;
         }
     }

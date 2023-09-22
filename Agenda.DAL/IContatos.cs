@@ -9,6 +9,6 @@ namespace Agenda.DAL
 {
     public interface IContatos
     {
-        IContatos Obter(Guid Id);
+        IContato Obter(Guid Id);
     }
 }

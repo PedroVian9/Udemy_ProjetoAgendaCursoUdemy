@@ -8,6 +8,7 @@ using Agenda.DAL;
 using Agenda.Repos;
 using NUnit.Framework;
 using Moq;
+using AutoFixture;
 
 namespace Agenda.Repos.Test
 {
@@ -51,6 +52,12 @@ namespace Agenda.Repos.Test
             //Verificar se o Contato retornado contém os mesmos dados do Moq IContato de Telefones do Moq ITelefone
             Assert.AreEqual(mContato.Object.Id, contatoResultado.Id);
             Assert.AreEqual(mContato.Object.Nome, contatoResultado.Nome);
+        }
+        [Test]
+        public void teste()
+        {
+            int a = 0;
+            Assert.That(9, Is.EqualTo(a));
         }
 
         [TearDown]
