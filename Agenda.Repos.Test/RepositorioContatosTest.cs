@@ -31,21 +31,21 @@ namespace Agenda.Repos.Test
         [Test]
         public void DeveSerPossivelObterContatoComListaTelefone()
         {
-            Guid telefoneId = Guid.NewGuid();
-            Guid contatoId = Guid.NewGuid();
-            List<ITelefone> lstTelefone = new List<ITelefone>();
+            var telefoneId = Guid.NewGuid();
+            var contatoId = Guid.NewGuid();
+            var lstTelefone = new List<ITelefone>();
 
-            Mock<IContato> mContato = IContatoConstr.Um().ComId(contatoId).ComNome("João").Obter();
+            var mContato = IContatoConstr.Um().ComId(contatoId).ComNome("João").Obter();
             
             mContato.SetupSet(o => o.Telefones = It.IsAny<List<ITelefone>>()).Callback<List<ITelefone>>(p =>  lstTelefone = p);
             
             _contatos.Setup(o => o.Obter(contatoId)).Returns(mContato.Object);
             
-            ITelefone mockTelefone = ITelefoneConstr.Um().Padrao().ComId(telefoneId)
+            var mockTelefone = ITelefoneConstr.Um().Padrao().ComId(telefoneId)
                 .ComContatoId(contatoId).Construir();
             _telefones.Setup(o => o.ObterTodosDoContato(contatoId)).Returns(new List<ITelefone> { mockTelefone });
             
-            IContato contatoResultado = _repositorioContatos.ObterPorId(contatoId);
+            var contatoResultado = _repositorioContatos.ObterPorId(contatoId);
             mContato.SetupGet(o => o.Telefones).Returns(lstTelefone);
             
             Assert.AreEqual(mContato.Object.Id, contatoResultado.Id);
